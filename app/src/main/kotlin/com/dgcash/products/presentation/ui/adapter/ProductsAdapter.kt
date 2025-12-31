@@ -2,7 +2,8 @@ package com.dgcash.products.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import com.dgcash.products.R
+import com.dgcash.products.core.base.BaseAdapter
 import com.dgcash.products.databinding.ProductRowItemBinding
 import com.dgcash.products.domain.entity.ProductItemModel
 import com.dgcash.products.presentation.utils.ProductEvents
@@ -10,40 +11,42 @@ import com.dgcash.products.presentation.utils.ProductEvents
 class ProductsAdapter(
     private val products: List<ProductItemModel>,
     private val productEvents: ProductEvents
-) :
-    RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
-
-    lateinit var binding: ProductRowItemBinding
+) : BaseAdapter<ProductItemModel>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProductsViewHolder {
-        binding =
-            ProductRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductsViewHolder(binding)
-    }
+    ): BaseAdapter<ProductItemModel>.BaseViewHolder {
+        val binding = ProductRowItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
 
-    override fun onBindViewHolder(
-        holder: ProductsViewHolder,
-        position: Int
-    ) {
-        val currentProduct = products[position]
-        holder.bind(currentProduct)
+        return ProductsViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return products.size
     }
 
-    inner class ProductsViewHolder(private val binding: ProductRowItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    override fun getItemForPosition(position: Int): ProductItemModel {
+        return products[position]
+    }
 
-        fun bind(product: ProductItemModel) {
-            binding.product = product
+    override fun getLayoutIdForPosition(position: Int): Int {
+        return R.layout.product_row_item
+    }
+
+    inner class ProductsViewHolder(private val binding: ProductRowItemBinding) :
+        BaseViewHolder(binding) {
+
+        override fun bind(item: ProductItemModel) {
+            binding.product = item
 
             binding.root.setOnClickListener {
-                productEvents.onProductClicked(product.id.toString())
+                productEvents.onProductClicked(item.id.toString())
             }
 
             binding.executePendingBindings()
