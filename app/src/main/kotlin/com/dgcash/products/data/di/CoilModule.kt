@@ -14,6 +14,7 @@ import jakarta.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object CoilModule {
+    const val IMAGE_CASH = "image_cache"
 
     @Provides
     @Singleton
@@ -26,7 +27,7 @@ object CoilModule {
             }
             .diskCache {
                 DiskCache.Builder()
-                    .directory(context.cacheDir.resolve("image_cache"))
+                    .directory(context.cacheDir.resolve(IMAGE_CASH))
                     .maxSizePercent(0.02)
                     .build()
             }
