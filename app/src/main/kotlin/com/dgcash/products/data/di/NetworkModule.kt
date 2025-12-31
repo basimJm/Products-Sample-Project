@@ -1,5 +1,6 @@
 package com.dgcash.products.data.di
 
+import com.dgcash.products.core.CoreConstants.BASE_URL
 import com.dgcash.products.data.remote.data_source.ProductApiService
 import dagger.Module
 import dagger.Provides
@@ -35,7 +36,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit =
-        Retrofit.Builder().baseUrl("https://dummyjson.com")
+        Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(gsonConverterFactory).client(okHttpClient).build()
 
     @Provides

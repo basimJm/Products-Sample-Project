@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -38,6 +39,17 @@ android {
 
     buildFeatures {
         dataBinding = true
+    }
+    sourceSets {
+        getByName("main") {
+            res {
+                srcDirs("src\\main\\res",
+                    "src\\main\\res\\layouts\\product_list",
+                    "src\\main\\res\\layouts\\main",
+                    "src\\main\\res\\layouts\\product_details"
+                )
+            }
+        }
     }
 }
 

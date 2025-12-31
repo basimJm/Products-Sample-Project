@@ -15,5 +15,4 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun provideProductRepository(productRepositoryImpl: ProductRepositoryImpl): ProductRepository
-
 }

@@ -9,4 +9,8 @@
         android:id="@+id/productsFragment"
         android:name="com.dgcash.products.presentation.ui.fragment.ProductsFragment"
         android:label="ProductsFragment" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.dgcash.products.presentation.ui.fragment.ProductDetailsFragment"
+        android:label="ProductDetailsFragment" />
 </navigation>

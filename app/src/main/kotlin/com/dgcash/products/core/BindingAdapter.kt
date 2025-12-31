@@ -5,16 +5,16 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import coil.load
 
-
-@BindingAdapter("imageLoader")
-fun imageLoader(view: ImageView, url: String) {
-    view.load(url)
+@BindingAdapter(CoreConstants.IMAGE_LOADER)
+fun imageLoader(view: ImageView, url: String?) {
+    url?.let { view.load(it) }
 }
 
 
-@BindingAdapter("priceText")
-fun priceText(view: TextView, price: Double) {
-    val price = "$$price"
-    view.text = price
+@BindingAdapter(CoreConstants.PRICE_TEXT)
+fun priceText(view: TextView, price: Double?) {
+    price?.let {
+        val price = "$ $it"
+        view.text = price
+    }
 }
-
